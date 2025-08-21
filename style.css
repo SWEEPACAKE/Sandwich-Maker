@@ -1,0 +1,27 @@
+body {
+    background-image: url('images/background.jpg');
+    background-size: 120%;
+    background-repeat: no-repeat;
+}
+#entete {
+    background-color: #FFF;
+    padding: 20px 35px;
+}
+#logo {
+    max-width: 400px;
+}
+#monTitre {
+    color: #ffca08;
+    text-shadow: #009845 2px 2px 5px;
+}
+input.monRadio {
+    margin-left: 3px !important;
+}
+#surpriseMe, #showFormulaire {
+    background-color: #009845;
+    border: 1px solid #ffca08;
+    border-radius: 15px;
+}
+.pointer {
+    cursor: pointer;
+}

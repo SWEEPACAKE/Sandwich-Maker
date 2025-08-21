@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subway Sandwich Maker</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+<body>
+    <!-- Notre projet commence ici  -->
+    <header>
+        <nav class="navbar shadow d-flex justify-content-center" id="entete">
+            <img src="images/logo_subway.png" id="logo" class="img-fluid"/>
+        </nav>
+    </header>
+    <div class="container my-5">
+        <h1 class="text-center mt-3 mb-5" id="monTitre">Fabriquez votre Sandwich chez <i>Subway</i></h1>
+        
+        <div class="text-center my-5">
+            <button id="showFormulaire" class="btn btn-primary" onclick="showFormulaire()">Faites votre choix</button>
+        </div>
+
+        <div class="row d-none" id="maRow">
+            <div class="col-12 col-md-6">
+                <!-- Le formulaire avec la liste des ingrédients     -->
+                <div class="card shadow p-3">
+                    <form id="sandwich_maker" name="sandwich_maker">
+                        <h2 class="mb-4">Ingrédients</h2>
+
+
+
+                        
+                        <h5 class="my-3 pointer" data-bs-toggle="collapse" data-bs-target="#collapsePain" 
+                        aria-expanded="true" aria-controls="collapsePain">
+                            Choisissez votre pain <i class="fa-solid fa-angle-down"></i>
+                        </h5>
+
+
+
+
+
+                        <div class="collapse show" id="collapsePain">
+                            <label for="italien">Italien</label>
+                            <input id="italien" type="radio" class="m-3 monRadio" value="Italien" name="pain"/>
+                            <label for="parmesan">Parmesan / Origan</label>
+                            <input id="parmesan" type="radio" class="m-3 monRadio" value="Parmesan / Origan" name="pain"/>
+                            <label for="avoine">Avoine / Miel</label>
+                            <input id="avoine" type="radio" class="m-3 monRadio" value="Avoine / Miel" name="pain"/>
+                            <label for="cereales">Céréales</label>
+                            <input id="cereales" type="radio" class="m-3 monRadio" value="Céréales" name="pain"/>
+                            <label for="flatbread">Flatbread</label>
+                            <input id="flatbread" type="radio" class="m-3 monRadio" value="Flatbread" name="pain"/>
+                            <label for="complet">Complet</label>
+                            <input id="complet" type="radio" class="m-3 monRadio" value="Complet" name="pain"/>
+                        </div>
+                        <h5 class="my-3">Choisissez vos ingrédients</h5>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div>
+                                    <input id="salade" type="checkbox" class="m-3 maCheckbox" value="Salade" name="ingredients[]"/>
+                                    <label for="salade">Salade</label>
+                                </div>
+                                <div>
+                                    <input id="tomate" type="checkbox" class="m-3 maCheckbox" value="Tomate" name="ingredients[]"/>
+                                    <label for="tomate">Tomate</label>
+                                </div>
+                                <div>
+                                    <input id="oignons" type="checkbox" class="m-3 maCheckbox" value="Oignons" name="ingredients[]"/>
+                                    <label for="oignons">Oignons</label>
+                                </div>
+                                <div>
+                                    <input id="olives" type="checkbox" class="m-3 maCheckbox" value="Olives" name="ingredients[]"/>
+                                    <label for="olives">Olives</label>
+                                </div>
+                                <div>
+                                    <input id="jalapenos" type="checkbox" class="m-3 maCheckbox" value="Jalapenos" name="ingredients[]"/>
+                                    <label for="jalapenos">Jalapenos</label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6">
+                                <div>
+                                    <input id="bacon" type="checkbox" class="m-3 maCheckbox" value="Bacon" name="ingredients[]"/>
+                                    <label for="bacon">Bacon</label>
+                                </div>
+                                <div>
+                                    <input id="steak" type="checkbox" class="m-3 maCheckbox" value="Steak" name="ingredients[]"/>
+                                    <label for="steak">Steak</label>
+                                </div>
+                                <div>
+                                    <input id="saucisse" type="checkbox" class="m-3 maCheckbox" value="Saucisse" name="ingredients[]"/>
+                                    <label for="saucisse">Saucisse</label>
+                                </div>
+                                <div>
+                                    <input id="poulettikka" type="checkbox" class="m-3 maCheckbox" value="Poulet Tikka" name="ingredients[]"/>
+                                    <label for="poulettikka">Poulet Tikka</label>
+                                </div>
+                                <div>
+                                    <input id="thon" type="checkbox" class="m-3 maCheckbox" value="Thon" name="ingredients[]"/>
+                                    <label for="thon">Thon</label>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="my-3">Choisissez une sauce</h5>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <select class="form-select" name="sauce" id="sauce" onchange="generateRecipe()">
+                                    <option value="">Choisissez votre sauce</option>
+                                    <option value="Ketchup">Ketchup</option>
+                                    <option value="Mayonnaise">Mayonnaise</option>
+                                    <option value="Barbecue">Barbecue</option>
+                                    <option value="Andalouse">Andalouse</option>
+                                    <option value="Samouraï">Samouraï</option>
+                                    <option value="Algérienne">Algérienne</option>
+                                    <option value="Béarnaise">Béarnaise</option>
+                                    <option value="Poivre">Poivre</option>
+                                    <option value="Sans sauce">Sans sauce</option>
+                                </select>
+                            </div>
+                        </div>
+                        <h5 class="my-3">Une instruction spéciale ?</h5>
+                        <input type="text" class="form-control" name="instruction" id="instruction" placeholder="Allergies, cuisson..." onblur="generateRecipe()"/>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <!-- L'affichage de la recette complète    -->
+                <div class="card d-block shadow p-3">
+                    <h2 class="mb-4">Votre recette</h2>
+                    <div class="text-center">
+                        <button id="surpriseMe" class="btn btn-primary" onclick="shuffle()">Surprenez-moi</button>
+                    </div>
+                    <div id="recette"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Et il se termine ici -->
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b9049baba7.js" crossorigin="anonymous"></script>
+</body>
+</html>
