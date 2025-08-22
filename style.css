@@ -25,3 +25,16 @@ input.monRadio {
 .pointer {
     cursor: pointer;
 }
+
+#total {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+#total #prix {
+    font-size: 60px;
+    font-weight: bold;
+    display: block;
+}

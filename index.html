@@ -43,62 +43,62 @@
 
                         <div class="collapse show" id="collapsePain">
                             <label for="italien">Italien</label>
-                            <input id="italien" type="radio" class="m-3 monRadio" value="Italien" name="pain"/>
+                            <input data-prix="0.70" id="italien" type="radio" class="m-3 monRadio" value="Italien" name="pain"/>
                             <label for="parmesan">Parmesan / Origan</label>
-                            <input id="parmesan" type="radio" class="m-3 monRadio" value="Parmesan / Origan" name="pain"/>
+                            <input data-prix="0.80" id="parmesan" type="radio" class="m-3 monRadio" value="Parmesan / Origan" name="pain"/>
                             <label for="avoine">Avoine / Miel</label>
-                            <input id="avoine" type="radio" class="m-3 monRadio" value="Avoine / Miel" name="pain"/>
+                            <input data-prix="0.70" id="avoine" type="radio" class="m-3 monRadio" value="Avoine / Miel" name="pain"/>
                             <label for="cereales">Céréales</label>
-                            <input id="cereales" type="radio" class="m-3 monRadio" value="Céréales" name="pain"/>
+                            <input data-prix="0.70" id="cereales" type="radio" class="m-3 monRadio" value="Céréales" name="pain"/>
                             <label for="flatbread">Flatbread</label>
-                            <input id="flatbread" type="radio" class="m-3 monRadio" value="Flatbread" name="pain"/>
+                            <input data-prix="0.50" id="flatbread" type="radio" class="m-3 monRadio" value="Flatbread" name="pain"/>
                             <label for="complet">Complet</label>
-                            <input id="complet" type="radio" class="m-3 monRadio" value="Complet" name="pain"/>
+                            <input data-prix="1" id="complet" type="radio" class="m-3 monRadio" value="Complet" name="pain"/>
                         </div>
                         <h5 class="my-3">Choisissez vos ingrédients</h5>
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div>
-                                    <input id="salade" type="checkbox" class="m-3 maCheckbox" value="Salade" name="ingredients[]"/>
+                                    <input data-prix="0.30" id="salade" type="checkbox" class="m-3 maCheckbox" value="Salade" name="ingredients[]"/>
                                     <label for="salade">Salade</label>
                                 </div>
                                 <div>
-                                    <input id="tomate" type="checkbox" class="m-3 maCheckbox" value="Tomate" name="ingredients[]"/>
+                                    <input data-prix="0.50" id="tomate" type="checkbox" class="m-3 maCheckbox" value="Tomate" name="ingredients[]"/>
                                     <label for="tomate">Tomate</label>
                                 </div>
                                 <div>
-                                    <input id="oignons" type="checkbox" class="m-3 maCheckbox" value="Oignons" name="ingredients[]"/>
+                                    <input data-prix="0.30" id="oignons" type="checkbox" class="m-3 maCheckbox" value="Oignons" name="ingredients[]"/>
                                     <label for="oignons">Oignons</label>
                                 </div>
                                 <div>
-                                    <input id="olives" type="checkbox" class="m-3 maCheckbox" value="Olives" name="ingredients[]"/>
+                                    <input data-prix="0.50" id="olives" type="checkbox" class="m-3 maCheckbox" value="Olives" name="ingredients[]"/>
                                     <label for="olives">Olives</label>
                                 </div>
                                 <div>
-                                    <input id="jalapenos" type="checkbox" class="m-3 maCheckbox" value="Jalapenos" name="ingredients[]"/>
+                                    <input data-prix="0.80" id="jalapenos" type="checkbox" class="m-3 maCheckbox" value="Jalapenos" name="ingredients[]"/>
                                     <label for="jalapenos">Jalapenos</label>
                                 </div>
                             </div>
                             
                             <div class="col-12 col-md-6">
                                 <div>
-                                    <input id="bacon" type="checkbox" class="m-3 maCheckbox" value="Bacon" name="ingredients[]"/>
+                                    <input data-prix="2" id="bacon" type="checkbox" class="m-3 maCheckbox" value="Bacon" name="ingredients[]"/>
                                     <label for="bacon">Bacon</label>
                                 </div>
                                 <div>
-                                    <input id="steak" type="checkbox" class="m-3 maCheckbox" value="Steak" name="ingredients[]"/>
+                                    <input data-prix="2" id="steak" type="checkbox" class="m-3 maCheckbox" value="Steak" name="ingredients[]"/>
                                     <label for="steak">Steak</label>
                                 </div>
                                 <div>
-                                    <input id="saucisse" type="checkbox" class="m-3 maCheckbox" value="Saucisse" name="ingredients[]"/>
+                                    <input data-prix="2" id="saucisse" type="checkbox" class="m-3 maCheckbox" value="Saucisse" name="ingredients[]"/>
                                     <label for="saucisse">Saucisse</label>
                                 </div>
                                 <div>
-                                    <input id="poulettikka" type="checkbox" class="m-3 maCheckbox" value="Poulet Tikka" name="ingredients[]"/>
+                                    <input data-prix="2" id="poulettikka" type="checkbox" class="m-3 maCheckbox" value="Poulet Tikka" name="ingredients[]"/>
                                     <label for="poulettikka">Poulet Tikka</label>
                                 </div>
                                 <div>
-                                    <input id="thon" type="checkbox" class="m-3 maCheckbox" value="Thon" name="ingredients[]"/>
+                                    <input data-prix="2" id="thon" type="checkbox" class="m-3 maCheckbox" value="Thon" name="ingredients[]"/>
                                     <label for="thon">Thon</label>
                                 </div>
                             </div>
@@ -107,16 +107,15 @@
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <select class="form-select" name="sauce" id="sauce" onchange="generateRecipe()">
-                                    <option value="">Choisissez votre sauce</option>
-                                    <option value="Ketchup">Ketchup</option>
-                                    <option value="Mayonnaise">Mayonnaise</option>
-                                    <option value="Barbecue">Barbecue</option>
-                                    <option value="Andalouse">Andalouse</option>
-                                    <option value="Samouraï">Samouraï</option>
-                                    <option value="Algérienne">Algérienne</option>
-                                    <option value="Béarnaise">Béarnaise</option>
-                                    <option value="Poivre">Poivre</option>
-                                    <option value="Sans sauce">Sans sauce</option>
+                                    <option data-prix="0" value="">Choisissez votre sauce</option>
+                                    <option data-prix="0.50" value="Ketchup">Ketchup</option>
+                                    <option data-prix="0.50" value="Mayonnaise">Mayonnaise</option>
+                                    <option data-prix="0.50" value="Barbecue">Barbecue</option>
+                                    <option data-prix="0.50" value="Andalouse">Andalouse</option>
+                                    <option data-prix="0.50" value="Samouraï">Samouraï</option>
+                                    <option data-prix="0.50" value="Algérienne">Algérienne</option>
+                                    <option data-prix="0.50" value="Béarnaise">Béarnaise</option>
+                                    <option data-prix="0.50" value="Poivre">Poivre</option>
                                 </select>
                             </div>
                         </div>
@@ -132,7 +131,14 @@
                     <div class="text-center">
                         <button id="surpriseMe" class="btn btn-primary" onclick="shuffle()">Surprenez-moi</button>
                     </div>
-                    <div id="recette"></div>
+                    <div class="row my-4">
+                        <div class="col-12 col-md-6">
+                            <div id="recette"></div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div id="total"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -140,6 +146,7 @@
 
 
     <!-- Et il se termine ici -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/b9049baba7.js" crossorigin="anonymous"></script>
