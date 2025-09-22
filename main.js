@@ -12,13 +12,20 @@ $(checkboxes).each(function() {
         generateRecipe();
     });
 });
+
+// Évènement qui gère l'envoi du formulaire
+$('#enregistrer').on('click', function() {
+    $('#sandwich_maker').submit();
+});
+
+
 // Renvoie la valeur du bouton radio "pain" qui a été choisi
 function getValuePain() {
     var value = '';
     var radios = $("input[name='pain']");
     $(radios).each(function() {
         if($(this).prop('checked') == true) {
-            value = $(this).val();
+            value = $(this).parent("div").find('label').html();
         }
     });
     return value;
@@ -34,7 +41,7 @@ function getValueIngredients() {
 }
 // Renvoie la valeur du select "sauce" qui a été choisi
 function getValueSauce() {
-    var value = $('#sauce').val();
+    var value = $('#sauce option:selected').html();
     var prix = $('#sauce option:selected').data('prix');
     var arrayReturn = [];
     arrayReturn['texte'] = value;
@@ -62,7 +69,7 @@ function generateRecipe() {
         recette += "<br>avec les ingrédients suivants : <ul>";
         $(ingredients).each(function() {
             total += +$(this).data('prix');
-            recette += "<li>" + $(this).val() + "</li>";
+            recette += "<li>" + $(this).parent('div').find('label').html() + "</li>";
         });
         recette += "</ul>";
     }
@@ -78,7 +85,7 @@ function generateRecipe() {
         recette += "<br>Votre instruction est : " + instruction;
     }
     $('#recette').html(recette);
-    $('#total').html("<div><p class='text-center'>Votre total : </p><div id='prix'>" + (Math.round(total * 100) / 100).toFixed(2) + "€</div></div>");
+    $('#total').html("<div class='animate__animated animate__bounce'><p class='text-center'>Votre total : </p><div id='prix'>" + (Math.round(total * 100) / 100).toFixed(2) + "€</div></div>");
 }
 function shuffle() {
     // Choix aléatoire d'un bouton radio (un seul)
@@ -132,3 +139,32 @@ function showFormulaire() {
     $("#maRow").removeClass("d-none");
     $("#showFormulaire").addClass("d-none");
 }
+
+
+$('#chooseRecipe').on('change', function() {
+    // Gestion en AJAX de la sélection d'une recette existante
+    $.ajax({
+        method: 'POST', // Décrit la méthode utilisée pour la requête HTTP, par défaut à GET
+        url: 'ajax/listeIngredients.ajax.php', // L'url du fichier que l'on va requêter
+        data: {id_recette: $('#chooseRecipe').val() }, // Tableau de données éventuelles en entrée
+        // Lorsque l'appel se passe avec succès, on récupère le résultat dans la variable response
+        success: function(response) {
+            var data = JSON.parse(response);
+            // Sélection du pain
+            $('input[value="' + data.recette.id_pain + '"][name="pain"]').prop('checked', true);
+            // Sélection de la sauce
+            $('#sauce').val(data.recette.id_sauce);
+            // Sélection des ingrédients
+            $('input[name="ingredients[]"]').prop('checked', false);
+            $(data.ingredients).each(function(index, value){
+                $('input[value="' + value + '"][name="ingredients[]"]').prop('checked', true);
+            });
+            generateRecipe();
+        }, 
+        // Lorsque l'appel se passe mal, on peut obtenir dans la variable error des information sur l'erreur en question
+        error: function(error) {
+            alert("Pardon, j'ai mal écrit le nom du fichier...");
+            console.log(error);
+        }
+    });
+});

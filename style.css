@@ -17,7 +17,7 @@ body {
 input.monRadio {
     margin-left: 3px !important;
 }
-#surpriseMe, #showFormulaire {
+#surpriseMe, #showFormulaire, #enregistrer {
     background-color: #009845;
     border: 1px solid #ffca08;
     border-radius: 15px;
