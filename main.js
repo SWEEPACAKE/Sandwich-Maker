@@ -13,6 +13,15 @@ $(checkboxes).each(function() {
     });
 });
 
+// Assignation de l'eventListener sur CHAQUE bouton radio
+var radiosBoissons = $("input[name='boisson']");
+$(radiosBoissons).each(function() {
+    $(this).change(function() {
+        generateRecipe();
+    });
+});
+
+
 // Évènement qui gère l'envoi du formulaire
 $('#enregistrer').on('click', function() {
     $('#sandwich_maker').submit();
@@ -48,6 +57,21 @@ function getValueSauce() {
     arrayReturn['prix'] = prix;
     return arrayReturn;
 }
+
+// Renvoie la valeur du bouton radio "boisson" qui a été choisi
+function getValueBoisson() {
+    var value = '';
+    var radios = $("input[name='boisson']");
+    $(radios).each(function() {
+        if($(this).prop('checked') == true) {
+            value = $(this).parent("div").find('label').html();
+        }
+    });
+    return value;
+}
+
+
+
 // Renvoie la valeur du select "sauce" qui a été choisi
 function getValueInstruction() {
     var value = $('#instruction').val();
@@ -79,6 +103,15 @@ function generateRecipe() {
         total += +sauce['prix'];
         recette += "<br>Votre sauce est : " + sauce['texte'];
     }
+
+    // Gestion de la boisson
+    var boisson = getValueBoisson();
+    if(boisson != '') {
+        total += +$("input[name='boisson']:checked").data('prix');
+        recette += "Vous avez choisi la boisson : " + boisson;
+    }
+
+
     // Gestion de l'instruction spéciale
     var instruction = getValueInstruction();
     if(instruction != '') {
@@ -116,6 +149,19 @@ function shuffle() {
     $(arrayCheckboxes).each(function() {
         $(this).prop('checked', true);
     });
+
+    // Choix aléatoire d'un bouton radio (un seul)
+    var radiosBoissons = $("input[name='boisson']");
+    var randomRadioIndex = Math.floor(Math.random() * (radiosBoissons.length - 1));
+    $(radiosBoissons).each(function(i) {
+        if(i == randomRadioIndex) {
+            $(this).prop('checked', true);
+        }
+    });
+
+
+
+
     // Gestion de l'aléatoire sur le select
     var select = document.getElementById('sauce');
     var items = select.getElementsByTagName('option');
@@ -159,6 +205,8 @@ $('#chooseRecipe').on('change', function() {
             $(data.ingredients).each(function(index, value){
                 $('input[value="' + value + '"][name="ingredients[]"]').prop('checked', true);
             });
+            // Sélection de la boisson
+            $('input[value="' + data.recette.id_boisson + '"][name="boisson"]').prop('checked', true);
             generateRecipe();
         }, 
         // Lorsque l'appel se passe mal, on peut obtenir dans la variable error des information sur l'erreur en question

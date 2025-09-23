@@ -8,6 +8,7 @@ $listePains = $database->query("SELECT * FROM pain");
 $listeSauces = $database->query("SELECT * FROM sauce");
 $listeIngredients1 = $database->query("SELECT * FROM ingredient LIMIT 0, 5");
 $listeIngredients2 = $database->query("SELECT * FROM ingredient LIMIT 5, 5");
+$listeBoissons = $database->query("SELECT * FROM boisson");
 
 if(!empty($_POST)) {
     // On n'exécute ce code que si $_POST
@@ -16,13 +17,14 @@ if(!empty($_POST)) {
         $_POST['sauce'] = NULL;
     }
 
-    $stmt = $database->prepare("INSERT INTO recette (nom, id_pain, id_sauce, id_utilisateur) 
-        VALUES (?, ?, ?, 1);");
+    $stmt = $database->prepare("INSERT INTO recette (nom, id_pain, id_sauce, id_utilisateur, id_boisson) 
+        VALUES (?, ?, ?, 1, ?);");
     $stmt->bind_param(
-        "sii", 
+        "siii", 
         $_POST['nomRecette'], 
         $_POST['pain'], 
-        $_POST['sauce']
+        $_POST['sauce'], 
+        $_POST['boisson']
     );
     $stmt->execute();
     $idRecette = $stmt->insert_id;
@@ -89,9 +91,11 @@ if(!empty($_POST)) {
                             <?php 
                             foreach($listePains as $pain) {
                                 ?>
-                                <label for="<?= strtolower($pain['nom']) ?>"><?= $pain['nom'] ?></label>
+                                <div class="d-inline-block">
+                                    <label for="<?= strtolower($pain['nom']) ?>"><?= $pain['nom'] ?></label>
 
-                                <input data-prix="<?= $pain['prix'] ?>" id="<?= strtolower($pain['nom']) ?>" type="radio" class="m-3 monRadio" value="<?= $pain['id'] ?>" name="pain"/>
+                                    <input data-prix="<?= $pain['prix'] ?>" id="<?= strtolower($pain['nom']) ?>" type="radio" class="m-3 monRadio" value="<?= $pain['id'] ?>" name="pain"/>
+                                </div>
                                 <?php
                             }
                             ?>
@@ -153,6 +157,33 @@ if(!empty($_POST)) {
                                 </select>
                             </div>
                         </div>
+
+
+
+                        <h5 class="my-3 pointer" data-bs-toggle="collapse" data-bs-target="#collapseBoisson" 
+                        aria-expanded="true" aria-controls="collapseBoisson">
+                            Choisissez votre boisson <i class="fa-solid fa-angle-down"></i>
+                        </h5>
+
+                        <div class="collapse show" id="collapseBoisson">
+
+                            <?php 
+                            foreach($listeBoissons as $boisson) {
+                                ?>
+                                <div class="d-inline-block">
+                                    <label for="<?= strtolower($boisson['nom']) ?>">
+                                        <?= $boisson['nom'] ?> (<?= $boisson['contenance'] ?>L)
+                                    </label>
+
+                                    <input data-prix="<?= $boisson['prix'] ?>" id="<?= strtolower($boisson['nom']) ?>" type="radio" class="m-3 monRadio" value="<?= $boisson['id'] ?>" name="boisson"/>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+
+
+
                         <h5 class="my-3">Une instruction spéciale ?</h5>
                         <input type="text" class="form-control" name="instruction" id="instruction" placeholder="Allergies, cuisson..." onblur="generateRecipe()"/>
                     </form>
